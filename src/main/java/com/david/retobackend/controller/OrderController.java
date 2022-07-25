@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.david.retobackend.service.TruckService;
-import com.david.retobackend.model.Truck;
+import com.david.retobackend.service.OrderService;
+import com.david.retobackend.model.Order;
 
 @RestController
 @RequestMapping("/api")
-public class TruckController {
+public class OrderController {
 
 	@Autowired
-	private TruckService truckService;
+	private OrderService orderService;
 
-	@GetMapping("/trucks")
-	public List<Truck> findAll() {
-		return truckService.findAll();
+	@GetMapping("/orders")
+	public List<Order> findAll() {
+		return orderService.findAll();
 	}
 
-	@PostMapping("/trucks")
-	public Truck addTruck(@RequestBody Truck truck) {
-		truck.setId(0);
-		truckService.save(truck);
-		return truck;
+	@PostMapping("/orders")
+	public Order addOrder(@RequestBody Order order) {
+		order.setId(0);
+		orderService.save(order);
+		return order;
 
 	}
 
-	@PutMapping("/trucks")
-	public Truck updateTruck(@RequestBody Truck truck) {
-		truckService.save(truck);
-		return truck;
+	@PutMapping("/orders")
+	public Order updateOrder(@RequestBody Order order) {
+		orderService.save(order);
+		return order;
 	}
 
-	@DeleteMapping("trucks/{truckId}")
-	public String deleteTruck(@PathVariable long truckId) {
+	@DeleteMapping("orders/{orderId}")
+	public String deleteOrder(@PathVariable long orderId) {
 
-		truckService.deleteById(truckId);
-		return "Truck Eliminated";
+		orderService.deleteById(orderId);
+		return "Order Eliminated";
 	}
 }

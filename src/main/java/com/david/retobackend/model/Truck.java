@@ -1,10 +1,14 @@
 package com.david.retobackend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,28 +17,33 @@ public class Truck implements Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	@Column(name = "brand")
 	private String brand;
 	@Column(name = "model")
 	private String model;
 
-	public Truck() {
+	@OneToMany(mappedBy = "truck")
+	List<Order> orderList;
 
+	public Truck() {
+		super();
+		orderList = new ArrayList<Order>();
 	}
 
 	public Truck(String brand, String model) {
 		super();
 		this.brand = brand;
 		this.model = model;
+		orderList = new ArrayList();
 
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -52,6 +61,22 @@ public class Truck implements Vehicle {
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+	public void addOrder(Order order) {
+		orderList.add(order);
+	}
+
+	public void removeOrder(Order order) {
+		orderList.remove(order);
+	}
+
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
 	}
 
 }
