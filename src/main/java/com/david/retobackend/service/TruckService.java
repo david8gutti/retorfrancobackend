@@ -1,11 +1,8 @@
 package com.david.retobackend.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import javax.persistence.EntityManager;
-
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +11,7 @@ import com.david.retobackend.repository.TruckRepository;
 
 @Service
 public class TruckService {
-	
+
 	@Autowired
 	private TruckRepository truckRepository;
 
@@ -29,6 +26,10 @@ public class TruckService {
 
 	public void deleteById(long truckId) {
 		truckRepository.deleteById(truckId);
+	}
+
+	public Optional<Truck> findById(long id) {
+		return truckRepository.findById(id);
 	}
 
 }

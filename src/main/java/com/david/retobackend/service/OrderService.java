@@ -1,6 +1,7 @@
 package com.david.retobackend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class OrderService {
 
 	public void save(Order order) {
 		orderRepository.save(order);
+	}
+
+	public Optional<Order> findById(long id) {
+		return orderRepository.findById(id);
 	}
 
 	public void deleteById(long orderId) {

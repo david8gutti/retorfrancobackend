@@ -3,11 +3,13 @@ package com.david.retobackend.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,21 +24,19 @@ public class Truck implements Vehicle {
 	private String brand;
 	@Column(name = "model")
 	private String model;
-
-	@OneToMany(mappedBy = "truck")
-	List<Order> orderList;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pc_fid", referencedColumnName = "id")
+	private List<Order> orders = new ArrayList<>();
 
 	public Truck() {
-		super();
-		orderList = new ArrayList<Order>();
+
 	}
 
 	public Truck(String brand, String model) {
 		super();
 		this.brand = brand;
 		this.model = model;
-		orderList = new ArrayList();
-
 	}
 
 	public long getId() {
@@ -63,20 +63,12 @@ public class Truck implements Vehicle {
 		this.model = model;
 	}
 
-	public void addOrder(Order order) {
-		orderList.add(order);
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void removeOrder(Order order) {
-		orderList.remove(order);
-	}
-
-	public List<Order> getOrderList() {
-		return orderList;
-	}
-
-	public void setOrderList(List<Order> orderList) {
-		this.orderList = orderList;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
 }
