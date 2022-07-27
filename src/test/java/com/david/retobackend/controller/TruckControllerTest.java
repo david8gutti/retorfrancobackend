@@ -75,7 +75,7 @@ class TruckControllerTest {
 	}
 
 	@Test
-	public void post_createsNewTruck_andReturnsObjWith201() throws Exception {
+	public void post_addOrderToTruck_andReturnsObjWith200() throws Exception {
 		Truck truck = new Truck("Audi", "Q3");
 		Order order = new Order("Amazon");
 
@@ -98,7 +98,7 @@ class TruckControllerTest {
 	}
 
 	@Test
-	public void post_addOrderToTruck_andReturnsObjWith200() throws Exception {
+	public void post_createsNewTruck_andReturnsObjWith201() throws Exception {
 		Truck truck = new Truck("Audi", "Q3");
 
 		Mockito.when(truckService.save(Mockito.any(Truck.class))).thenReturn(truck);

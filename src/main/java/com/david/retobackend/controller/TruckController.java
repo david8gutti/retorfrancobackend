@@ -22,6 +22,15 @@ import com.david.retobackend.exception.TruckNotFoundException;
 import com.david.retobackend.model.Order;
 import com.david.retobackend.model.Truck;
 
+/**
+ * 
+ * Controlador de la clase de camiones (Truck), el cual permitirá visualizar,
+ * crear, actualizar y eliminar camiones
+ * 
+ * @author: David Gutierrez Mariblanca
+ * 
+ * 
+ */
 @RestController
 @RequestMapping("/api")
 public class TruckController {
@@ -32,6 +41,13 @@ public class TruckController {
 	@Autowired
 	private OrderService orderService;
 
+	/**
+	 * 
+	 * Metodo que devuelve todos los camiones
+	 * 
+	 * @return La lista de camiones existentes
+	 * 
+	 */
 	@GetMapping("/trucks")
 	public ResponseEntity<List<Truck>> findAll() {
 		List<Truck> listTruck = truckService.findAll();
@@ -41,6 +57,14 @@ public class TruckController {
 		return new ResponseEntity<List<Truck>>(listTruck, HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * Metodo que devuelve un camion en concreto
+	 * 
+	 * @param Id del camion
+	 * @return El camion especifico
+	 * 
+	 */
 	@GetMapping("/trucks/{truckId}")
 	public ResponseEntity<Truck> getTruck(@PathVariable int truckId) {
 		Optional<Truck> optionalTruck = truckService.findById(truckId);
@@ -51,6 +75,14 @@ public class TruckController {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo que crea un camion
+	 * 
+	 * @param Camion a crear
+	 * @return El camion ya creado
+	 * 
+	 */
 	@PostMapping("/trucks")
 	public ResponseEntity<Truck> addTruck(@RequestBody Truck truck) {
 		truck.setId(0);
@@ -59,6 +91,14 @@ public class TruckController {
 
 	}
 
+	/**
+	 * 
+	 * Metodo que asigna un pedido a un camion
+	 * 
+	 * @param Cabeceras del id de un pedido y del id de un camion
+	 * @return El pedido asignado al camion
+	 * 
+	 */
 	@PostMapping("/orderToTruck")
 	public ResponseEntity<Truck> addOrderToTruck(@RequestHeader("order_id") int order_id,
 			@RequestHeader("truck_id") int truck_id) {
@@ -77,12 +117,28 @@ public class TruckController {
 
 	}
 
+	/**
+	 * 
+	 * Metodo que actualiza un camion
+	 * 
+	 * @param Camion a actualizar
+	 * @return El camion ya actualizado
+	 * 
+	 */
 	@PutMapping("/trucks")
 	public ResponseEntity<Truck> updateTruck(@RequestBody Truck truck) {
 		truckService.save(truck);
 		return new ResponseEntity<Truck>(truck, HttpStatus.ACCEPTED);
 	}
 
+	/**
+	 * 
+	 * Metodo que elimina un camion
+	 * 
+	 * @param Id del camion
+	 * @return Exito de la eliminacion
+	 * 
+	 */
 	@DeleteMapping("trucks/{truckId}")
 	public ResponseEntity<Object> deleteTruck(@PathVariable long truckId) {
 

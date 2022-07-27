@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,10 +25,15 @@ public class Truck implements Vehicle {
 	private String brand;
 	@Column(name = "model")
 	private String model;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pc_fid", referencedColumnName = "id")
+	@JoinColumn(name = "order_id", referencedColumnName = "id")
 	private List<Order> orders = new ArrayList<>();
+
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+	private Location location;
 
 	public Truck() {
 
@@ -70,5 +76,15 @@ public class Truck implements Vehicle {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
 
 }
