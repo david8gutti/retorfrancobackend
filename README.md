@@ -13,6 +13,8 @@ Para el funcionamiento de esta aplicación, se ha utilizado las siguientes tecno
 - Spring Boot
 - PostgreSQL
 
-Una vez arrancado la aplicación, se crearán los vehiculos necesarios para transportar los pedidos, en este caso camiones. Por defecto, no tienen ningún pedido ni ubicación asignados, por lo que por consiguiente se crearán los pedidos para despues añadirlos al camión. Por ultimo, a la hora de que se asigne una ubicación al vehiculo, se guardará en el historial automaticamente. 
+Una vez arrancado la aplicación, se crearán los vehiculos necesarios para transportar los pedidos, en este caso camiones. Por defecto, no tienen ningún pedido ni ubicación asignados, por lo que por consiguiente se crearán los pedidos para despues añadirlos al camión. Por ultimo, a la hora de que se asigne una ubicación al vehiculo, se guardará en el historial automaticamente.
+
+Se ha conseguido una cobertura del 73,3%
 
 Se proporcionará un archivo para poder probar la API con la herramienta Postman.
