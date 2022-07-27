@@ -1,10 +1,17 @@
 package com.david.retobackend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,11 +20,20 @@ public class Truck implements Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private long id;
 	@Column(name = "brand")
 	private String brand;
 	@Column(name = "model")
 	private String model;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_id", referencedColumnName = "id")
+	private List<Order> orders = new ArrayList<>();
+
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+	private Location location;
 
 	public Truck() {
 
@@ -27,14 +43,13 @@ public class Truck implements Vehicle {
 		super();
 		this.brand = brand;
 		this.model = model;
-
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -53,5 +68,23 @@ public class Truck implements Vehicle {
 	public void setModel(String model) {
 		this.model = model;
 	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
 
 }
