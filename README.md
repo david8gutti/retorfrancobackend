@@ -1,7 +1,7 @@
 Developer Challenge - BackEnd Challenge
 ====================================
 
-https://rfrancodigital.com/wp-content/uploads/2018/01/R-Franco-Digital-logo-web.jpg
+![Logo RFRANCO](https://rfrancodigital.com/wp-content/uploads/2018/01/R-Franco-Digital-logo-web.jpg) 
 
 ## Explicación
 Esta aplicación es un reto propuesto por la empresa RFranco. Consiste en una API, en el que los vehiculos puedan conectarse y añadir pedidos a su reparto, para que los usuarios puedan obtener la posicion actual de su pedido.
