@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.retobackend.service.OrderService;
+import com.david.retobackend.exception.OrderNotFoundException;
 import com.david.retobackend.model.Order;
 
 @RestController
@@ -26,8 +27,12 @@ public class OrderController {
 	private OrderService orderService;
 
 	@GetMapping("/orders")
-	public List<Order> findAll() {
-		return orderService.findAll();
+	public ResponseEntity<List<Order>> findAll() {
+		List<Order> listOrders = orderService.findAll();
+		if (listOrders.isEmpty()) {
+			throw new OrderNotFoundException("No orders were found");
+		}
+		return new ResponseEntity<List<Order>>(listOrders, HttpStatus.OK);
 	}
 
 	@GetMapping("/orders/{orderId}")
@@ -41,23 +46,23 @@ public class OrderController {
 	}
 
 	@PostMapping("/orders")
-	public Order addOrder(@RequestBody Order order) {
+	public ResponseEntity<Order> addOrder(@RequestBody Order order) {
 		order.setId(0);
 		orderService.save(order);
-		return order;
-
+		return new ResponseEntity<Order>(order, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/orders")
-	public Order updateOrder(@RequestBody Order order) {
+	public ResponseEntity<Order> updateOrder(@RequestBody Order order) {
 		orderService.save(order);
-		return order;
+
+		return new ResponseEntity<Order>(order, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("orders/{orderId}")
-	public String deleteOrder(@PathVariable long orderId) {
+	public ResponseEntity<Object> deleteOrder(@PathVariable long orderId) {
 
 		orderService.deleteById(orderId);
-		return "Order Eliminated";
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }

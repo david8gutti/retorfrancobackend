@@ -20,8 +20,8 @@ public class TruckService {
 		return listUsers;
 	}
 
-	public void save(Truck truck) {
-		truckRepository.save(truck);
+	public Truck save(Truck truck) {
+		return truckRepository.save(truck);
 	}
 
 	public void deleteById(long truckId) {

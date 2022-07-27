@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.david.retobackend.service.OrderService;
 import com.david.retobackend.service.TruckService;
+import com.david.retobackend.exception.TruckNotFoundException;
 import com.david.retobackend.model.Order;
 import com.david.retobackend.model.Truck;
 
@@ -32,8 +33,12 @@ public class TruckController {
 	private OrderService orderService;
 
 	@GetMapping("/trucks")
-	public List<Truck> findAll() {
-		return truckService.findAll();
+	public ResponseEntity<List<Truck>> findAll() {
+		List<Truck> listTruck = truckService.findAll();
+		if (listTruck.isEmpty()) {
+			throw new TruckNotFoundException("No trucks were found");
+		}
+		return new ResponseEntity<List<Truck>>(listTruck, HttpStatus.OK);
 	}
 
 	@GetMapping("/trucks/{truckId}")
@@ -47,10 +52,10 @@ public class TruckController {
 	}
 
 	@PostMapping("/trucks")
-	public Truck addTruck(@RequestBody Truck truck) {
+	public ResponseEntity<Truck> addTruck(@RequestBody Truck truck) {
 		truck.setId(0);
 		truckService.save(truck);
-		return truck;
+		return new ResponseEntity<Truck>(truck, HttpStatus.CREATED);
 
 	}
 
@@ -73,15 +78,15 @@ public class TruckController {
 	}
 
 	@PutMapping("/trucks")
-	public Truck updateTruck(@RequestBody Truck truck) {
+	public ResponseEntity<Truck> updateTruck(@RequestBody Truck truck) {
 		truckService.save(truck);
-		return truck;
+		return new ResponseEntity<Truck>(truck, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("trucks/{truckId}")
-	public String deleteTruck(@PathVariable long truckId) {
+	public ResponseEntity<Object> deleteTruck(@PathVariable long truckId) {
 
 		truckService.deleteById(truckId);
-		return "Truck Eliminated";
+		return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 }
