@@ -17,4 +17,4 @@ Una vez arrancado la aplicación, se crearán los vehiculos necesarios para tran
 
 Se ha conseguido una cobertura del 73,3%
 
-Se proporcionará un archivo para poder probar la API con la herramienta Postman.
+Se proporcionará un archivo en el directorio raíz, para poder probar la API con la herramienta Postman.
